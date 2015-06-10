@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+	<bean id="dataSource" class="com.palmyou.v7data.core.datasource.DynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry key="readerDataSource" value-ref="readerDataSource" />
+				<entry key="writerDataSource" value-ref="writerDataSource" />
+			</map>
+		</property>
+		<property name="defaultTargetDataSource" ref="readerDataSource" />
+	</bean>
+	
+    <bean id="readerDataSource" class="com.palmyou.v7data.core.datasource.MyDruidDataSource"
+        init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url"
+            value="${reader.jdbc.url}" />
+        <property name="username"
+            value="${reader.jdbc.username}" />
+        <property name="password"
+            value="${reader.jdbc.password}" />
+
+        <property name="filters" value="stat" />
+    </bean>
+    <bean id="writerDataSource" class="com.palmyou.v7data.core.datasource.MyDruidDataSource"
+        init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url"
+            value="${writer.jdbc.url}" />
+        <property name="username"
+            value="${writer.jdbc.username}" />
+        <property name="password"
+            value="${writer.jdbc.password}" />
+
+        <property name="filters" value="stat" />
+    </bean>
+</beans>

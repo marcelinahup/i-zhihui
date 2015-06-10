@@ -1,0 +1,81 @@
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="jquery,ui,easy,easyui,web">
+    <meta name="description" content="easyui help you build your web page easily!">
+    <title>jQuery EasyUI Demo</title>
+    <script type="text/javascript" src="../jquery.min.js"></script>
+    <script type="text/javascript" src="../easyloader.js"></script>
+</head>
+<body>
+    <h1>DataGrid</h1>
+    <input type="button" value="显示数据" onclick="showTable()" />
+    <input type="button" value="显示数据2" onclick="showTable2()" />
+    <input type="button" value="选中行" onclick="getSelected()" />
+    <input type="button" value="选中多行" onclick="getSelections()" />
+    <table id="tt" title="Column Group" class="easyui-datagrid" style="width:550px;height:250px"
+            data-options="multipleSelect:true,
+                method:'post',
+                remoteSort:false,
+                pagination:true,
+                multiSort:true,rownumbers:true">
+        <thead>
+            <tr>
+                <th data-options="field:'ck',checkbox:true">Item ID</th>
+                <th data-options="field:'itemid',width:80">Item ID</th>
+                <th data-options="field:'productid',width:100">Product</th>
+                <th data-options="field:'listprice',width:80,align:'right'">List Price</th>
+                <th data-options="field:'unitcost',width:80,align:'right'">Unit Cost</th>
+                <th data-options="field:'attr1',width:240">Attribute</th>
+                <th data-options="field:'status',width:60,align:'center'">Status</th>
+            </tr>
+        </thead>
+    </table>
+    <script>
+        function showTable2(){
+            $('#tt').datagrid({
+                url:'data/datagrid_data2.json'
+            });
+        }
+        function showTable(){
+            $('#tt').datagrid({
+                url:'data/datagrid_data.json'
+            });
+            
+           /*  // 自定义分页
+            var pager = $('#tt').datagrid().datagrid('getPager');   // get the pager of datagrid
+            pager.pagination({
+                buttons:[{
+                    handler:function(){
+                        alert('search');
+                    }
+                },{
+                    handler:function(){
+                        alert('add');
+                    }
+                },{
+                    handler:function(){
+                        alert('edit');
+                    }
+                }]
+            });         */
+        }
+        function getSelected(){
+            var row = $('#tt').datagrid('getSelected');
+            if (row){
+                alert('Info:'+ row.listprice+":"+row.attr1);
+            }
+        }
+        
+        function getSelections(){
+            var ss = [];
+            var rows = $('#tt').datagrid('getSelections');
+            for(var i=0; i<rows.length; i++){
+                var row = rows[i];
+                ss.push('<span>'+row.itemid+":"+row.productid+":"+row.attr1+'</span>');
+            }
+            alert('Info:'+ss.join('<br/>'));
+        }
+    </script>
+</body>
+</html>

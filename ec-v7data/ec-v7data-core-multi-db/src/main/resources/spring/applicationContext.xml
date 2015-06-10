@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+    xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:util="http://www.springframework.org/schema/util"
+    xmlns:aop="http://www.springframework.org/schema/aop"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd  
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd  
+            http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd              
+            http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd">
+
+<context:annotation-config />
+<context:component-scan base-package="com.palmyou" />
+<tx:annotation-driven transaction-manager="transactionManager" />
+
+<!-- =======================import resources========================================== -->
+    <import resource="../dubbo/dubbo-provider-config.xml"/>
+    <import resource="../dubbo/service-config.xml"/>
+
+    <import resource="../quartz/quartz-config.xml"/>
+    
+    <!-- import the dao definition -->
+    <!-- <import resource="dao-reader-config.xml"/> -->
+    <import resource="dao-writer-config.xml"/>
+    
+    <import resource="datasource-config.xml"/>
+    <import resource="redis-config.xml"/>
+    
+<!-- =======================mail========================================== -->
+    <bean id="simpleMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+         
+        <property name="host" value="smtp.easeye.com.cn"/>
+        <!-- 群发是26端口，单发25，27都行 -->
+        <property name="port" value="25"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+            </props>
+        </property>
+        <property name="username" value="xu.yuanting@chinaredstar.com"/>
+        <property name="password" value="59194020"/>
+    </bean>    
+ <!-- 邮件发送配置 -->
+    <bean id="groupMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+         
+        <property name="host" value="smtp.easeye.com.cn"/>
+        <!-- 群发是26端口，单发25，27都行 -->
+        <property name="port" value="26"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+            </props>
+        </property>
+        <property name="username" value="xu.yuanting@chinaredstar.com"/>
+        <property name="password" value="59194020"/>
+    </bean>    
+
+    <bean id="coreMailSender" class="com.palmyou.common.mail.CoreMailSender">
+        <property name="simpleMailSender" ref="simpleMailSender"/>
+        <property name="groupMailSender" ref="groupMailSender"/>
+        <property name="velocityEngine" ref="velocityEngine"/>
+    </bean>
+    
+ <!-- =======================velocityEngine========================================== -->   
+   <bean id="velocityEngine" class="org.springframework.ui.velocity.VelocityEngineFactoryBean">
+        <property name="velocityProperties">
+            <props>
+                <prop key="resource.loader">class</prop>
+                <prop key="class.resource.loader.class">
+                    org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader
+                </prop>
+            </props>
+        </property>
+    </bean>
+    
+ <!-- =======================velocityEngine========================================== --> 
+    <context:component-scan  base-package="com.palmyou.v7data.core"/>
+    <!-- <context:component-scan  base-package="com.palmyou.v7data.order"/> -->
+    <!-- Configurer that replaces ${...} placeholders with values from a properties file -->
+    <!-- (in this case, JDBC-related settings for the JPA EntityManager definition below) 
+    <context:property-placeholder location="classpath:config/data-access.properties"/>
+    -->
+    
+    <bean id="propertyConfigurer"
+		class="com.palmyou.fw.spring.ext.PropertiesUtils">
+		<property name="locations">
+			<list>
+				<value>classpath:config/system.properties</value>
+				<value>classpath:config/config.properties</value>
+				<value>classpath:config/sysCode.properties</value>
+			</list>
+		</property>
+	</bean>
+    
+    <!-- 日志配置 -->
+    <bean id="logAspect" class="com.palmyou.fw.aop.LogAspect" ></bean>
+    <aop:config>  
+        <aop:aspect id="logAspect" ref="logAspect">
+            <!-- 配置com.spring.service包下所有类或接口的所有方法  -->
+           <aop:pointcut id="allService"  
+                expression="execution(* com.palmyou.v7data.core.service.user.impl.*.*(..))" />  
+            <!-- <aop:before pointcut-ref="allService" method="doBefore"/>
+            <aop:after pointcut-ref="allService" method="doAfter"/> -->
+            <aop:around pointcut-ref="allService" method="doAround"/>
+            <aop:after-throwing pointcut-ref="allService" method="doThrowing" throwing="ex"/>
+        </aop:aspect>
+    </aop:config>
+    
+</beans>

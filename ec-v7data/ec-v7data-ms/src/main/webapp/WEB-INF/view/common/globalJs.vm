@@ -1,0 +1,10 @@
+<script src="#springUrl('/resource/js/3thlib/jquery.min.js')"></script>
+<script src="#springUrl('/resource/js/3thlib/jquery.form.min.js')"></script>
+<script src="#springUrl('/resource/js/3thlib/jquery.validate.js')"></script>
+<script src="#springUrl('/resource/plugins/loading/loading.js')"></script>
+<script src="#springUrl('/resource/js/common/global.js')"></script>
+<script src="#springUrl('/resource/js/common/alert.js')"></script>
+<script>var springUrl="#springUrl('')";</script>
+<script src="#springUrl('/resource/js/common/top.js')"></script>
+<!--<script src="#springUrl('/resource/skin/default/js/top.js')"></script> -->
+<script src="#springUrl('/resource/skin/dark/js/top.js')"></script> 

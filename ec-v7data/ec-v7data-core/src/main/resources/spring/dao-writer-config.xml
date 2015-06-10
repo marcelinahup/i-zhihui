@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+    <bean id="writerSqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="writerDataSource" />
+        <property name="mapperLocations" value="classpath*:com/palmyou/v7data/core/persistence/writer/*Mapper.xml" /> 
+        <property name="typeAliasesPackage" value="com.palmyou.v7data.api.domain" />
+        
+        <!-- mybatis plugins -->
+		 <property name="plugins">
+		    <array>
+				<!-- 分页插件 -->
+				<bean class="com.palmyou.fw.ui.pager.PageHelper">
+				  <property name="properties">
+				   <value>
+				      dialect=mysql
+				    </value>
+				  </property>
+				</bean>
+		      
+				<!-- 通用mapper -->
+				<bean class="com.github.abel533.mapperhelper.MapperInterceptor">
+				    <property name="properties">
+				      <value>
+				        mappers=com.github.abel533.mapper.Mapper
+				        IDENTITY=MYSQL
+				        notEmpty=true
+				      </value>
+				    </property>
+				  </bean>
+		    </array>
+		  </property>
+		  
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.palmyou.v7data.core.persistence.writer" />
+        <property name="sqlSessionFactoryBeanName" value="writerSqlSessionFactory" />
+    </bean>
+    
+    <bean id="transactionManager"
+        class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="writerDataSource" />
+    </bean>
+    
+    <bean id="writerDataSource" class="com.alibaba.druid.pool.DruidDataSource"
+        init-method="init" destroy-method="close">
+        <!-- 基本属性 url、user、password -->
+        <property name="url"
+            value="${writer.jdbc.url}" />
+        <property name="username"
+            value="${writer.jdbc.username}" />
+        <property name="password"
+            value="${writer.jdbc.password}" />
+
+        <property name="filters" value="stat" />
+        <!-- 配置初始化大小、最小、最大 -->
+        <property name="maxActive" value="100" />
+        <property name="initialSize" value="5" />
+        <property name="minIdle" value="3" />
+
+        <!-- 配置获取连接等待超时的时间 -->
+        <property name="maxWait" value="60000" />
+
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+
+        <property name="validationQuery" value="select 1" />
+        <property name="testWhileIdle" value="true" />
+        <property name="testOnBorrow" value="true" />
+        <property name="testOnReturn" value="false" />
+
+        <!-- 打开removeAbandoned功能 【关闭由于程序问题长时间不关闭的连接】 -->
+        <property name="removeAbandoned" value="true" />
+        <!-- 600秒，也就是10分钟 -->
+        <property name="removeAbandonedTimeout" value="600" />
+        <!-- 关闭abanded连接时输出错误日志 -->
+        <property name="logAbandoned" value="true" />
+        
+        <property name="poolPreparedStatements" value="false" />
+    </bean>
+    
+</beans>

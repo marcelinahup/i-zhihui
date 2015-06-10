@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--
+	
+	星号由左到右按顺序代表 ：    *    *     *     *    *    *   *     
+                                            格式: [秒] [分] [小时] [日] [月] [周] [年]
+                                            
+       序号 说明 是否必填  允许填写的值 允许的通配符 
+	
+	1  秒  是  0-59    , - * / 
+	2  分  是  0-59   , - * / 
+	3 小时  是  0-23   , - * / 
+	4  日  是  1-31   , - * ? / L W 
+	5  月  是  1-12 or JAN-DEC   , - * / 
+	6  周  是  1-7 or SUN-SAT   , - * ? / L # 
+	7  年  否  empty 或 1970-2099  , - * / 
+        附表： 
+        “0 0 12 * * ?” 每天中午12点触发 
+        “0 15 10 ? * *” 每天上午10:15触发 
+        “0 15 10 * * ?” 每天上午10:15触发 
+        “0 15 10 * * ? *” 每天上午10:15触发 
+        “0 15 10 * * ? 2005″ 2005年的每天上午10:15触发 
+        “0 * 14 * * ?” 在每天下午2点到下午2:59期间的每1分钟触发 
+        “0 0/5 14 * * ?” 在每天下午2点到下午2:55期间的每5分钟触发 
+        “0 0/5 14-18 * * ?” 在每天下午2点到2:55期间和下午6点到6:55期间的每5分钟触发 
+        “0 0-5 14 * * ?” 在每天下午2点到下午2:05期间的每1分钟触发 
+        “0 10,44 14 ? 3 WED” 每年三月的星期三的下午2:10和2:44触发 
+        “0 15 10 ? * MON-FRI” 周一至周五的上午10:15触发 
+        “0 15 10 15 * ?” 每月15日上午10:15触发 
+        “0 15 10 L * ?” 每月最后一日的上午10:15触发 
+        “0 15 10 ? * 6L” 每月的最后一个星期五上午10:15触发 
+        “0 15 10 ? * 6L 2002-2005″ 2002年至2005年的每月的最后一个星期五上午10:15触发 
+        “0 15 10 ? * 6#3″ 每月的第三个星期五上午10:15触发
+    -->
+
+	<!-- 调用顺序：0-3-2-1 -->
+	<!-- ========================= Schedule RESOURCE DEFINITIONS ========================= -->
+
+	<!-- 0,总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+	<bean id="startQuertz" lazy-init="true" autowire="no"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<!-- 触发时间 -->
+				<ref bean="helloTaskDoTime" />
+			</list>
+		</property>
+	</bean>
+
+	<!-- 1,处理对象 -->
+	<bean id="helloTask" class="com.palmyou.v7data.core.task.HelloTask" />
+
+	<!-- 2,工作内容 -->
+	<bean id="helloTaskJob"
+        class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <!-- 处理对象 -->
+        <property name="targetObject" ref="helloTask" />
+
+        <!-- 调用类中的方法 -->
+        <property name="targetMethod" value="sayHello" />
+        
+        <!-- 不要并发，如果一个任务未结束不要开启下一个 -->
+        <property name="concurrent" value="false" />
+    </bean>
+
+	<!-- 3,触发时间 -->
+	<bean id="helloTaskDoTime" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<!-- 工作内容 -->
+		<property name="jobDetail" ref="helloTaskJob" />
+
+		<!-- cron表达式 -->
+		<property name="cronExpression" value="0 0-59 10 * * ?" />
+	</bean>
+        
+</beans>

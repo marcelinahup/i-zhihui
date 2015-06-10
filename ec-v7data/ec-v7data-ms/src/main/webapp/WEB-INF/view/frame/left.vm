@@ -1,0 +1,144 @@
+<!--
+        <div class="leftBg" id="leftMenu1">
+            <div id="leftTopTime" class="lefttop"><span></span></div>
+            
+            <dl class="leftmenu">
+                
+            <dd>
+            <div class="title">
+            <span><img src="#springUrl('/resources/images/leftico01.png')" /></span>管理信息
+            </div>
+                <ul class="menuson">
+                <li class="active"><cite></cite><a href="dashboard.html" target="rightFrame">首页</a><i></i></li>
+                
+                <li><cite></cite><a href="form.html" target="rightFrame">添加编辑</a><i></i></li>
+                <li><cite></cite><a href="imglist.html" target="rightFrame">图片列表</a><i></i></li>
+                <li><cite></cite><a href="imglist1.html" target="rightFrame">自定义</a><i></i></li>
+                <li><cite></cite><a href="tools.html" target="rightFrame">常用工具</a><i></i></li>
+                <li><cite></cite><a href="filelist.html" target="rightFrame">信息管理</a><i></i></li>
+                <li><cite></cite><a href="tab.html" target="rightFrame">Tab页</a><i></i></li>
+                <li><cite></cite><a href="error.html" target="rightFrame">404页面</a><i></i></li>
+             
+                </ul>    
+            </dd>
+                
+            
+            <dd>
+            <div class="title">
+            <span><img src="#springUrl('/resources/images/leftico02.png')" /></span>其他设置
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="#">编辑内容</a><i></i></li>
+                <li><cite></cite><a href="#">发布信息</a><i></i></li>
+                <li><cite></cite><a href="#">档案列表显示</a><i></i></li>
+                </ul>     
+            </dd> 
+            
+            
+            <dd><div class="title"><span><img src="#springUrl('/resources/images/leftico03.png')" /></span>编辑器</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="#">自定义</a><i></i></li>
+                <li><cite></cite><a href="#">常用资料</a><i></i></li>
+                <li><cite></cite><a href="#">信息列表</a><i></i></li>
+                <li><cite></cite><a href="#">其他</a><i></i></li>
+            </ul>    
+            </dd>  
+            
+            
+            <dd><div class="title"><span><img src="#springUrl('/resources/images/leftico04.png')" /></span>日期管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="#">自定义</a><i></i></li>
+                <li><cite></cite><a href="#">常用资料</a><i></i></li>
+                <li><cite></cite><a href="#">信息列表</a><i></i></li>
+                <li><cite></cite><a href="#">其他</a><i></i></li>
+            </ul>
+            
+            </dd>   
+            
+            </dl>
+        </div>
+
+
+        <div class="leftBg" id="leftMenu2" style="display:none;">
+            <div id="leftTopTime" class="lefttop"><span></span>第二LEFT</div>
+            
+            <dl class="leftmenu">
+                
+            <dd>
+            <div class="title">
+            <span><img src="#springUrl('/resources/images/leftico01.png')" /></span>模型管理
+            </div>
+                <ul class="menuson">
+                <li><cite></cite><a href="index.html" target="rightFrame">导航切换</a><i></i></li>
+                <li class="active"><cite></cite><a href="right.html" target="rightFrame">列表显示</a><i></i></li>
+                <li><cite></cite><a href="imgtable.html" target="rightFrame">图片显示</a><i></i></li>
+                <li><cite></cite><a href="form.html" target="rightFrame">表单</a><i></i></li>
+                <li><cite></cite><a href="imglist.html" target="rightFrame">图片画面</a><i></i></li>
+                <li><cite></cite><a href="imglist1.html" target="rightFrame">新画面</a><i></i></li>
+                <li><cite></cite><a href="tools.html" target="rightFrame">系统小工具</a><i></i></li>
+                <li><cite></cite><a href="filelist.html" target="rightFrame">右边画面</a><i></i></li>
+                <li><cite></cite><a href="tab.html" target="rightFrame">Tab页切换</a><i></i></li>
+                <li><cite></cite><a href="error.html" target="rightFrame">404错误页面</a><i></i></li>
+                </ul>    
+            </dd>
+                
+            
+            <dd>
+            <div class="title">
+            <span><img src="#springUrl('/resources/images/leftico02.png')" /></span>其他设置
+            </div>
+            <ul class="menuson">
+                <li><cite></cite><a href="#">编辑内容</a><i></i></li>
+                <li><cite></cite><a href="#">发布信息</a><i></i></li>
+                <li><cite></cite><a href="#">档案列表显示</a><i></i></li>
+                </ul>     
+            </dd> 
+            
+            
+            <dd><div class="title"><span><img src="#springUrl('/resources/images/leftico03.png')" /></span>编辑器</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="#">自定义</a><i></i></li>
+                <li><cite></cite><a href="#">常用资料</a><i></i></li>
+                <li><cite></cite><a href="#">信息列表</a><i></i></li>
+                <li><cite></cite><a href="#">其他</a><i></i></li>
+            </ul>    
+            </dd>  
+            
+            
+            <dd><div class="title"><span><img src="#springUrl('/resources/images/leftico04.png')" /></span>日期管理</div>
+            <ul class="menuson">
+                <li><cite></cite><a href="#">自定义</a><i></i></li>
+                <li><cite></cite><a href="#">常用资料</a><i></i></li>
+                <li><cite></cite><a href="#">信息列表</a><i></i></li>
+                <li><cite></cite><a href="#">其他</a><i></i></li>
+            </ul>
+            
+            </dd>   
+            
+            </dl>
+        </div>
+
+-->
+
+ <div class="leftBg" id="leftMenu1">
+            <div id="leftTopTime" class="lefttop"><span></span></div>
+            
+            <dl class="leftmenu">
+             #foreach($leftMenuList in ${leftMenuListList})  
+            <dd seitopmenuid="seitopmenuid_$leftMenuList.topMenuId" style="display:none">
+            <div class="title">
+            <span></span>$leftMenuList.leftMenuTitle
+            </div>
+                <ul class="menuson">
+				#foreach($leftMenu in $leftMenuList.leftMenuContent)
+					<li><cite></cite><a href="$leftMenu.url" target="rightFrame">$leftMenu.menu_name</a><i></i></li>
+				#end
+				
+                </ul>    
+            </dd>
+            #end  
+            
+            
+            </dl>
+        </div>
+

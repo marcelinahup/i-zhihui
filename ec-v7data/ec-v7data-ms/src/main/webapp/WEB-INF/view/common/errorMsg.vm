@@ -1,0 +1,5 @@
+<!-- our error container -->
+<div #if( $errorContainer ) id="$errorContainer" #else id="errorMsg" #end class="errorContainer">
+    <h4>表单数据不规范.</h4>
+    <ol></ol>
+</div>

@@ -1,0 +1,37 @@
+<!--头部-->
+	<header>
+        <div class="topLogo">
+      <!--右上角较色管理和登录等-->
+			<div class="iconSchool"></div>
+			<div class="sName"></div>
+                
+        <!--右上角较色管理和登录等end-->
+		</div>
+		<div class="systemN"></div>
+		<div id="header">
+        	<div id="headoptions">
+				<ul>
+					<li><a target="rightFrame" href="#springUrl('/user/basicInfo.html')">$userName</a></li>
+					<li><a target="rightFrame" href="$yundiskurl">我的云盘</a></li>
+					<li><a href="#springUrl('/loginout.html')" target="_parent">登出系统</a></li>
+				</ul>
+			</div>
+        <!--头部菜单-->
+			<div id="menudiv">
+				<ul class="nav">
+					<li><a href="#springUrl('/research/home.html')" class="selected" id="workPanel" target="rightFrame"><h2>首页</h2></a></li>
+					<!-- 
+					<li><a href="#" id="modelManage"><h2>代理商管理</h2></a></li>
+					<li><a href="imglist.html"  target="rightFrame"><h2>商户管理</h2></a></li>
+					<li><a href="tools.html"  target="rightFrame"><h2>机具管理</h2></a></li>
+					<li><a href="computer.html" target="rightFrame"><h2>财物管理</h2></a></li>
+					<li><a href="tab.html"  target="rightFrame"><h2>系统设置</h2></a></li>
+					-->
+					#foreach($topMenu in ${topMenuList})
+						 <li><a href="$topMenu.getUrl()" id="$topMenu.getMenuId()"  target="rightFrame"><h2>$topMenu.getMenuName()</h2></a></li>
+					#end
+				</ul>
+			</div>
+        <!--头部菜单end-->
+		</div>
+	</header>

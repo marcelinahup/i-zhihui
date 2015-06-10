@@ -1,0 +1,13 @@
+<toolbox>
+	<xhtml>true</xhtml>
+	<tool>
+	   <key>dateTool</key>
+	   <scope>application</scope>
+	   <class>org.apache.velocity.tools.generic.DateTool</class>
+	</tool>
+	<tool>
+	    <key>amountUtil</key>
+	    <scope>application</scope>
+	    <class>com.palmyou.common.util.AmountUtils</class>
+	</tool>
+</toolbox>

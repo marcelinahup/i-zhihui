@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+#parse("/common/head.vm")
+ <script type="text/javascript" src="#springUrl('/resource/js/jquery.form.min.js')"></script>
+<title>用户评论列表</title>
+<script>
+$(function(){
+    $('#settingall').flexigrid();
+            
+        init();
+        
+        $(window).resize(function(){
+            init(); 
+        })
+        
+        function init(){
+        
+            $('.bDiv').css('height','auto');
+            $('.bDiv').css('overflow-y','hidden');
+        }
+          //复选框全选
+         CommonUtil.initCommonCheckBox();
+    
+    //新增评论，跳新页面
+    $('.gotoAddCommentPage').click(function(){
+        var url = "#springUrl('/userProductComment/gotoAddCommentPage.htm')";
+  //      window.location.href = url;
+		
+		window.open(url);
+		
+    })
+    
+    //点击修改按钮
+    $("#modifyComment").click(UserCommentList.modifyComment);
+    //点击查询按钮
+    $("#searchBtn").click(function(){
+                $("#userCommentListQueryForm").attr("action","#springUrl('/userProductComment/userCommentList.htm')");
+                CommonUtil.gotoPage("userCommentListQueryForm",0);
+                });
+
+});
+    /**
+     * 定义用户评论列表操作对象，对js操作统一管理
+     **/
+    var UserCommentList = {
+
+         /**
+          * 点击修改评论
+          **/
+          modifyComment : function(){
+            //获取所勾选评论id
+            var ids = CommonUtil.getSelectedCheckBoxValue();
+            if(ids.length != 1){
+                CommonUtil.alertinfo("请选择一条数据！");
+                return ;
+            }
+
+    //        window.location.href = "#springUrl('/userProductComment/modifyComment.htm?commentId=')"+ids[0];
+			window.open("#springUrl('/userProductComment/modifyComment.htm?commentId=')"+ids[0]);
+          },
+          //排序
+        sortlist:function(sortcolumn,obj){
+        #if($!{userProductCommentQuery.sortFlag})
+            
+                var sortFlag = "$!{userProductCommentQuery.sortFlag}";
+                $("#querySortColumn").val(sortcolumn);
+                
+                if(sortFlag == "1"){
+                    $("#querySortFlag").val("2");
+                    $("#querySortType").val("DESC");
+                }
+                if(sortFlag == "2"){
+                    $("#querySortFlag").val("1");
+                    $("#querySortType").val("ASC");
+                }
+            
+            #end
+                CommonUtil.gotoPage("userCommentListQueryForm",1);
+        }
+    }
+	
+function openWindow(commentId) {
+	window.open("#springUrl('/userProductComment/modifyComment.htm?commentId=')"+commentId);
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="containerH">
+
+  <div class="rightdiv" >
+     <div class="contentR" >
+       <div class="tablebox">
+            <ul class="breadcrumb">
+               <li>首页<span class="divider">></span></li>
+               <li>用户管理 <span class="divider">></span></li>
+               <li class="active">用户评论列表</li>
+              </ul>
+       
+       <form id="userCommentListQueryForm" name="userCommentListQueryForm" action="#springUrl('/userProductComment/userCommentList.htm')" method="post">
+            <div class="search">
+                <div class="title">查询</div>
+                 <input id="querySortFlag" name="userProductCommentQuery.sortFlag" value="$!userProductCommentQuery.sortFlag"  type="hidden" />
+                    <input id="querySortColumn" name="userProductCommentQuery.sortColumn" value="$!userProductCommentQuery.sortColumn" type="hidden"  />
+                    <input id="querySortType" name="userProductCommentQuery.sortType" value="$!userProductCommentQuery.sortType"  type="hidden"  />
+                <div class="searchBox">
+                    <div>评论等级： 
+                             <select id="commentLevel" name="userProductCommentQuery.commentLevel" value="$!userProductCommentQuery.commentLevel" >
+                            <option value=''>请选择</option>
+                            <option value='1' #if($!{userProductCommentQuery.commentLevel} && $!{userProductCommentQuery.commentLevel}==1) selected #end>差评</option>
+                            <option value='3' #if($!{userProductCommentQuery.commentLevel} && $!{userProductCommentQuery.commentLevel}==3) selected #end>中评</option>
+                            <option value='5' #if($!{userProductCommentQuery.commentLevel} && $!{userProductCommentQuery.commentLevel}==5) selected #end>好评</option>
+                        </select>
+                     </div>
+                     <div>评论星级： 
+                             <select id="commentRank" name="userProductCommentQuery.commentRank" value="$!userProductCommentQuery.commentRank" >
+                            <option value=''>请选择</option>
+                            <option value='1' #if($!{userProductCommentQuery.commentRank} && $!{userProductCommentQuery.commentRank}==1) selected #end>1星</option>
+                            <option value='2' #if($!{userProductCommentQuery.commentRank} && $!{userProductCommentQuery.commentRank}==2) selected #end>2星</option>
+                            <option value='3' #if($!{userProductCommentQuery.commentRank} && $!{userProductCommentQuery.commentRank}==3) selected #end>3星</option>
+                            <option value='4' #if($!{userProductCommentQuery.commentRank} && $!{userProductCommentQuery.commentRank}==4) selected #end>4星</option>
+                            <option value='5' #if($!{userProductCommentQuery.commentRank} && $!{userProductCommentQuery.commentRank}==5) selected #end>5星</option>
+                        </select>
+                     </div>
+                     <div>审核状态： 
+                        <select id="hasReview" name="userProductCommentQuery.hasReview" value="$!userProductCommentQuery.hasReview" >
+                            <option value=''>请选择</option>
+                            <option value='0' #if($!{userProductCommentQuery.hasReview} && $!{userProductCommentQuery.hasReview}==0) selected #end>未审核</option>
+                            <option value='1' #if($!{userProductCommentQuery.hasReview} && $!{userProductCommentQuery.hasReview}==1) selected #end>已审核</option>
+                        </select>
+                     </div>
+                     <div>是否审核通过： 
+                        <select id="isApproved" name="userProductCommentQuery.isApproved" value="$!userProductCommentQuery.isApproved" >
+                            <option value=''>请选择</option>
+                            <option value='0' #if($!{userProductCommentQuery.isApproved} && $!{userProductCommentQuery.isApproved}==0) selected #end>未通过</option>
+                            <option value='1' #if($!{userProductCommentQuery.isApproved} && $!{userProductCommentQuery.isApproved}==1) selected #end>已通过</option>
+                        </select>
+                     </div>
+                     <div>商品代码： <input type="text" name="userProductCommentQuery.pdtCode" value="$!userProductCommentQuery.pdtCode" class="txtBox" /></div>
+                     <div>评论人：     <input type="text" name="userProductCommentQuery.nickname" value="$!userProductCommentQuery.nickname" class="txtBox" /></div>
+                     <div>关联订单号： <input type="text" name="userProductCommentQuery.orderSn" value="$!userProductCommentQuery.orderSn" class="txtBox" /></div>
+                     <div>评论时间： <input type="text" style="width:120px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate: '%y-%M-%d 00:00:00' ,alwaysUseStartDate: true})" name="userProductCommentQuery.startCreateDatetime" value="$!dateTimeUtil.format($!userProductCommentQuery.startCreateDatetime)" class="txtBox" /> --  
+                                    <input type="text" style="width:120px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate: '%y-%M-%d 23:59:59' ,alwaysUseStartDate: true})" name="userProductCommentQuery.endCreateDatetime" value="$!dateTimeUtil.format($!userProductCommentQuery.endCreateDatetime)" class="txtBox" /></div>
+                     <div>审核时间： <input type="text" style="width:120px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate: '%y-%M-%d 00:00:00' ,alwaysUseStartDate: true})" name="userProductCommentQuery.startReviewTime" value="$!dateTimeUtil.format($!userProductCommentQuery.startReviewTime)" class="txtBox" /> --  
+                                    <input type="text" style="width:120px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate: '%y-%M-%d 23:59:59' ,alwaysUseStartDate: true})" name="userProductCommentQuery.endReviewTime" value="$!dateTimeUtil.format($!userProductCommentQuery.endReviewTime)" class="txtBox" /></div>
+                     <div>回复时间： <input type="text" style="width:120px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate: '%y-%M-%d 00:00:00' ,alwaysUseStartDate: true})" name="userProductCommentQuery.startAnswerTime" value="$!dateTimeUtil.format($!userProductCommentQuery.startAnswerTime)" class="txtBox" /> --  
+                                    <input type="text" style="width:120px;" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate: '%y-%M-%d 23:59:59' ,alwaysUseStartDate: true})" name="userProductCommentQuery.endAnswerTime" value="$!dateTimeUtil.format($!userProductCommentQuery.endAnswerTime)" class="txtBox" /></div>
+                     
+               
+                </div>
+                <div class="searchBtn">
+                    <div class="btn" id="searchBtn"><div class="icon"><img src="#springUrl('/resource/images/search_icon.png')" /></div><div class="txt">查 询</div></div>
+                </div>
+            </div>
+       </form>
+            <div class="btnLine">
+                <div class="btn add_comment_btn gotoAddCommentPage"><div class="icon"><img src="#springUrl('/resource/images/search2_icon.png')" /></div><div class="txt">新增评论</div></div>
+                <div class="btn" id="modifyComment"><div class="icon"><img src="#springUrl('/resource/images/modi_icon.png')" /></div><div class="txt">修改评论</div></div>
+                
+            </div>
+            
+            <div style="padding:15px; ">
+             <div style=" overflow-x:auto;">
+              <table  id="settingall" class="grid" width="100%">
+                <thead>
+                    <tr>
+                      #if($page.getCountRecord()!=0) 
+                      <th width="30" id="hidden_th"><input type="checkbox" id="allCheckboxItemChecked" name="allCheckboxItemChecked" /></th>
+                    #end
+                      <th width="80"  onclick="UserCommentList.sortlist('comment_id',this)">评论ID</th>
+                      <th width="100" onclick="UserCommentList.sortlist('pdt_code',this)">商品代码</th>      
+                      <th width="200" onclick="UserCommentList.sortlist('pdt_name',this)">商品名称</th>
+                      <th width="100"  onclick="UserCommentList.sortlist('order_sn',this)" >关联订单号</th>   
+                      <th width="130" onclick="UserCommentList.sortlist('comment_rank',this)">评论星级</th>
+                      <th width="70"  onclick="UserCommentList.sortlist('has_review',this)">是否审核</th>
+                      <th width="100" onclick="UserCommentList.sortlist('is_approved',this)">是否审核通过</th>
+                      <th width="70"  onclick="UserCommentList.sortlist('review_operator',this)">审核者</th>
+                      <th width="120" onclick="UserCommentList.sortlist('review_time',this)">审核时间</th>
+                      <th width="50"  onclick="UserCommentList.sortlist('display_sort',this)">显示顺序</th>
+                      <th width="70"  onclick="UserCommentList.sortlist('nickname',this)">评论人</th>
+                      <th width="120" onclick="UserCommentList.sortlist('create_datetime',this)">评论时间</th>
+                      <th width="120" onclick="UserCommentList.sortlist('answer_time',this)">回复时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    #foreach($userComment in $page.getList())
+                    <tr>
+                        <td width="30" style="text-align:center;">
+                            <input type="checkbox" name="checkboxItem" value="$!{userComment.commentId}">
+                        </td>
+                        <td style="text-align:center;"><a href="#" onclick="openWindow($!{userComment.commentId})">&nbsp&nbsp;$!{userComment.commentId}&nbsp&nbsp;</a></td>
+                        <td style="text-align:center;">$!{userComment.pdtCode}</td>
+                        <td style="text-align:center;">$!{userComment.pdtName}</td>
+                        <td style="text-align:center;">$!{userComment.orderSn}</td>
+                        <td style="text-align:center;">$!{userComment.commentRank}星</td>
+                        <td style="text-align:center;">
+                        #if($!{userComment.hasReview} && $!{userComment.hasReview}==0)   
+                                                未审核
+                        #elseif($!{userComment.hasReview} && $!{userComment.hasReview}==1)
+                                                 已审核
+                        #end
+                        </td>
+                        <td style="text-align:center;">
+                         #if($!{userComment.isApproved} && $!{userComment.isApproved}==0)   
+                                                未通过
+                        #elseif($!{userComment.isApproved} && $!{userComment.isApproved}==1)
+                                                 已通过
+                        #end
+                        </td>
+                        <td style="text-align:center;">$!{userComment.reviewOperator}</td>
+                        <td>$!dateTimeUtil.format($!{userComment.reviewTime})</td>
+                        <td style="text-align:center;">$!{userComment.displaySort}</td>
+                        <td style="text-align:center;">$!{userComment.nickname}</td>
+                        <td>$!dateTimeUtil.format($!{userComment.createDatetime})</td>
+                        <td>$!dateTimeUtil.format($!{userComment.answerTime})</td>
+                    </tr>
+                    #end
+                     #if($page.getCountRecord()==0)<tr><td colspan="13" style="width:1350px"><font color="red"> 查询不到数据... </font></td></tr>#end
+                </tbody>
+            </table>
+            </div>
+            </div>
+             <div class="bottompage">
+                #page("userCommentListQueryForm")
+            </div>       
+       </div>   
+    </div> 
+  </div>
+</div>
+<div style="clear:both;"></div>
+<div class="modal-backdrop" style="display:none;"></div>
+</body>
+</html>
