@@ -15,7 +15,6 @@
 <!-- =======================import resources========================================== -->
     <import resource="../dubbo/dubbo-provider-config.xml"/>
     <import resource="../dubbo/service-config.xml"/>
-
     <import resource="../quartz/quartz-config.xml"/>
     
     <!-- import the dao definition -->
@@ -73,19 +72,7 @@
         </property>
     </bean>
     
- <!-- =======================velocityEngine========================================== --> 
     <context:component-scan  base-package="com.palmyou.v7data.core"/>
-        
-    <bean id="propertyConfigurer"
-		class="com.palmyou.fw.spring.ext.PropertiesUtils">
-		<property name="locations">
-			<list>
-				<value>classpath:config/system.properties</value>
-				<value>classpath:config/config.properties</value>
-				<value>classpath:config/sysCode.properties</value>
-			</list>
-		</property>
-	</bean>
     
     <!-- 日志配置 -->
     <bean id="logAspect" class="com.palmyou.fw.aop.LogAspect" ></bean>
@@ -100,5 +87,40 @@
             <aop:after-throwing pointcut-ref="allService" method="doThrowing" throwing="ex"/>
         </aop:aspect>
     </aop:config>
+    
+    <!-- 不同的运行环境配置 -->
+    <beans profile="local">  
+		<bean id="propertyConfigurer" class="com.palmyou.fw.spring.ext.PropertiesUtils">
+			<property name="locations">
+				<list>
+					<value>classpath:config/system.properties</value>
+					<value>classpath:config/config.properties</value>
+					<value>classpath:config/sysCode.properties</value>
+				</list>
+			</property>
+		</bean>
+	</beans>
+    <beans profile="test">  
+		<bean id="propertyConfigurer" class="com.palmyou.fw.spring.ext.PropertiesUtils">
+			<property name="locations">
+				<list>
+					<value>classpath:config/test/system.properties</value>
+					<value>classpath:config/test/config.properties</value>
+					<value>classpath:config/test/sysCode.properties</value>
+				</list>
+			</property>
+		</bean>
+	</beans> 
+    <beans profile="online">  
+		<bean id="propertyConfigurer" class="com.palmyou.fw.spring.ext.PropertiesUtils">
+			<property name="locations">
+				<list>
+					<value>classpath:config/online/system.properties</value>
+					<value>classpath:config/online/config.properties</value>
+					<value>classpath:config/online/sysCode.properties</value>
+				</list>
+			</property>
+		</bean>
+	</beans>
     
 </beans>

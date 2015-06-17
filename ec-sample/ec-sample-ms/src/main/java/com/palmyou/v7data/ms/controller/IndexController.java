@@ -18,12 +18,20 @@ import com.palmyou.v7data.ms.util.MsgUtil;
 public class IndexController extends BaseController{
 	private static final Logger logger = Logger.getLogger(IndexController.class);
 
-	@RequestMapping({"/login","/404","500"})
-    public void login(){
+	@RequestMapping({"/home"})
+	public void home(){
 		// 原始密码输入有误！
 		System.out.println(MsgUtil.getMsg("CE-00001"));
 		logger.debug("html loading ...");
 	}
+	
+	@RequestMapping("/ajaxView")
+    public ModelAndView showContentPart(ModelAndView model) {
+        model.addObject("name", "myvalue");
+        model.addObject("name1", "111111111111");
+        model.setViewName("tpls/userTpls :: content");
+        return model;
+    }
 	
 	@RequestMapping("/doLogin")
 	public ModelAndView doLogin(ModelAndView mav, HttpServletRequest request,HttpServletResponse response,

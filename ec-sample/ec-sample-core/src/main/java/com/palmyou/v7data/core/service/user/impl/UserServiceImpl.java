@@ -5,7 +5,6 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.abel533.mapper.Mapper;
 import com.palmyou.v7data.api.domain.user.UserInfo;
 import com.palmyou.v7data.api.service.user.UserServiceApi;
 import com.palmyou.v7data.core.persistence.writer.UserInfoWriterMapper;

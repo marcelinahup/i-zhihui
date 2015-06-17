@@ -6,7 +6,7 @@
 	<display-name>ec-v7data-core</display-name>
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>ec-v7data-core</param-value>
+		<param-value>ec-v7data-core-mulit-db</param-value>
 	</context-param>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
@@ -20,13 +20,11 @@
 	</context-param>
 	
 	<context-param>
-		<param-name>sessionTimeout</param-name>
-		<param-value>30</param-value>
+	    <param-name>spring.profiles.active</param-name>
+	    <param-value>local</param-value>
+	    <!-- <param-value>${profiles.active}</param-value> -->
 	</context-param>
-	<context-param>
-	    <param-name>sessionKey</param-name>
-	    <param-value>os_session_key</param-value>
-  	</context-param>
+	
 	<listener>
 		<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
 	</listener>

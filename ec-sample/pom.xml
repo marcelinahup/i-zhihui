@@ -17,7 +17,14 @@
 		<spring.version>3.1.4.RELEASE</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.thymeleaf</groupId>
+			<artifactId>thymeleaf-spring3</artifactId>
+			<version>2.1.4.RELEASE</version>
+		</dependency>
+	</dependencies>
 	<modules>
 		
 		<module>ec-v7data-ms</module>

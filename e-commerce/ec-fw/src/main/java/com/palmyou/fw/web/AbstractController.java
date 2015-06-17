@@ -35,8 +35,8 @@ import com.palmyou.fw.spring.ext.StringArgumentUtil;
  */
 public abstract class AbstractController {
 	
-	@Resource
-	private VelocityConfigurer velocityConfigurer;
+//	@Resource
+//	private VelocityConfigurer velocityConfigurer;
 	
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
@@ -118,7 +118,7 @@ public abstract class AbstractController {
 	 * @param vmodel
 	 * @return
 	 */
-	protected String merge2HTML(String vmFile,Map<String,Object> dataMap){
+	/*protected String merge2HTML(String vmFile,Map<String,Object> dataMap){
 
 		//dataMap 中加入velocityToolBox生成的处理对象，方便vm里面的宏调用
 		
@@ -157,11 +157,11 @@ public abstract class AbstractController {
 			}
 		}
 		
-    	/* 
+    	 
     	 * velocityConfigurer.resourceLoaderPath
 		 * templateLocation the location of template, relative to Velocity's resource loader path
-    	 */
+    	 
 		return VelocityEngineUtils.mergeTemplateIntoString(velocityConfigurer.getVelocityEngine(), vmFile, "utf-8", dataMap);
-	}
+	}*/
 	
 }

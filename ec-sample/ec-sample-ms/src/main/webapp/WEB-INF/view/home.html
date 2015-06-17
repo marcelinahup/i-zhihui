@@ -1,0 +1,12 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<p th:text="'Hello, ' + ${name} + ' with thymeleaf !'" />
+	<p  th:replace="tpls/userTpls :: content1" />
+</body>
+<script src="../../static/js/3thlib/jquery.min.js" th:src="@{/static/js/3thlib/jquery.min.js}"></script>
+<script type="text/javascript">
+	/* $.post("ajaxView.shtml", function(rs){
+		alert(rs);
+	}); */
+</script>
+</html>

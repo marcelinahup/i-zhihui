@@ -38,10 +38,10 @@ public class SystemContextListener extends ContextLoaderListener {
 		MySessionConfig config = new MySessionConfig();
 		SessionManager.setConfig(config);
 		
-		ValueOperations<String, Set<KeyValEntry>> sysCodeValueOperations = RedisTemplateUtil.getRedisValueOperations();
+//		ValueOperations<String, Set<KeyValEntry>> sysCodeValueOperations = RedisTemplateUtil.getRedisValueOperations();
 		
 		// 初始化系统编码-值数据
-		initSysCode(sysCodeValueOperations);
+//		initSysCode(sysCodeValueOperations);
 		
 	}
 	

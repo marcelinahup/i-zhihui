@@ -38,22 +38,57 @@
 	</dependencies>
 
 		<!-- =========================================== -->
+		
+	<!-- 不同的打包环境 -->
+	<profiles>
+	    <profile>
+	        <id>local</id>
+	        <properties>
+	            <profiles.active>local</profiles.active>
+	        </properties>
+	        <activation>
+	            <!-- 默认启用的是dev环境配置 -->
+	            <activeByDefault>true</activeByDefault>
+	        </activation>
+	    </profile>
+	    <profile>
+	        <id>test</id>
+	        <properties>
+	            <profiles.active>test</profiles.active>
+	        </properties>
+	    </profile>
+	    <profile>
+	        <id>online</id>
+	        <properties>
+	            <profiles.active>online</profiles.active>
+	        </properties>
+	    </profile>
+	</profiles>
+	
 	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<excludes>
-					<exclude>config/**/*.properties</exclude>
-				</excludes>
-			</resource>
-			<resource>
-				<directory>src/main/resources/config/${project.build.package}</directory>
-				<includes>
-					<include>*.properties</include>
-				</includes>
-				<targetPath>./config/</targetPath>
-			</resource>
-		</resources>
+		<plugins>
+			<plugin>
+			    <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-war-plugin</artifactId>
+
+        		<configuration>
+					<warName>ROOT(${profiles.active})</warName>
+				
+					<!-- 激活spring profile -->
+					<webResources>
+						<resource>
+							<filtering>true</filtering>
+							<directory>src/main/webapp</directory>
+							<includes>
+								<include>**/web.xml</include>
+							</includes>
+						</resource>
+					</webResources>
+					<warSourceDirectory>src/main/webapp</warSourceDirectory>
+					<webXml>src/main/webapp/WEB-INF/web.xml</webXml>
+				</configuration>
+        	</plugin>
+		</plugins>
 	</build>
 	<packaging>war</packaging>
 </project>
