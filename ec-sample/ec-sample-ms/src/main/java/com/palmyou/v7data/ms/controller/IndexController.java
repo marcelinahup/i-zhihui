@@ -2,6 +2,7 @@ package com.palmyou.v7data.ms.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -19,7 +20,11 @@ public class IndexController extends BaseController{
 	private static final Logger logger = Logger.getLogger(IndexController.class);
 
 	@RequestMapping({"/home"})
-	public void home(){
+	public void home(HttpSession session){
+		
+		session.setAttribute("111", "222");
+		System.out.println(session.getAttribute("111"));
+		
 		// 原始密码输入有误！
 		System.out.println(MsgUtil.getMsg("CE-00001"));
 		logger.debug("html loading ...");
