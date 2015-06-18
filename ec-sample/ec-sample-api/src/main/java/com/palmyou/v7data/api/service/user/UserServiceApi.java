@@ -1,5 +1,7 @@
 package com.palmyou.v7data.api.service.user;
 
+import java.util.List;
+
 import com.palmyou.v7data.api.domain.user.UserInfo;
 
 /**
@@ -15,5 +17,7 @@ public interface UserServiceApi {
 	 * @return
 	 */
 	public UserInfo getUserInfoById(String userId);
+
+	public List<UserInfo> getUserListPage(int pageNum,int pageSize);
 
 }

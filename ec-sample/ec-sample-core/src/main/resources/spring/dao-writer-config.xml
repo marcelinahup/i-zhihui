@@ -12,7 +12,7 @@
 		 <property name="plugins">
 		    <array>
 				<!-- 分页插件 -->
-				<bean class="com.palmyou.fw.ui.pager.PageHelper">
+				<bean class="com.github.pagehelper.PageHelper">
 				  <property name="properties">
 				   <value>
 				      dialect=mysql

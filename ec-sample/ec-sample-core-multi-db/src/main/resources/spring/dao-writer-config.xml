@@ -10,7 +10,7 @@
         <!-- mybatis plugins -->
 		 <property name="plugins">
 		    <array>
-		      <bean class="com.palmyou.fw.ui.pager.PageHelper">
+		      <bean class="com.github.pagehelper.PageHelper">
 		        <property name="properties">
 		         <value>
 		            dialect=mysql

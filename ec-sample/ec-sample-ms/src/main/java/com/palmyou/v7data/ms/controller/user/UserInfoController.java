@@ -1,4 +1,6 @@
 package com.palmyou.v7data.ms.controller.user;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.slf4j.Logger;
@@ -36,6 +38,17 @@ public class UserInfoController extends BaseController {
 		
 		result.setOk(true);
 		result.setData(user);
+		return result;
+	}
+	
+	@RequestMapping("page")
+	@ResponseBody
+	public JsonResult page(JsonResult result) {
+		
+		List<UserInfo> users = userServiceApi.getUserListPage(1, 10);
+		
+		result.setOk(true);
+		result.setData(users);
 		return result;
 	}
 }

@@ -1,7 +1,7 @@
 package com.palmyou.v7data.core.service.user.impl;
 
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -11,7 +11,6 @@ import org.springframework.data.redis.core.ValueOperations;
 
 import com.palmyou.common.util.StringUtils;
 import com.palmyou.fw.spring.ext.SpringUtils;
-import com.palmyou.fw.ui.KeyValEntry;
 import com.palmyou.fw.web.util.RedisTemplateUtil;
 import com.palmyou.v7data.api.domain.user.UserInfo;
 import com.palmyou.v7data.api.service.user.UserServiceApi;
@@ -55,6 +54,11 @@ public class UserServiceImpl implements UserServiceApi {
 		System.out.println("===========================================");
 		System.out.println(userNameCache.get("userName"));
 		return user;
+	}
+	@Override
+	public List<UserInfo> getUserListPage(int pageNum, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 //	@Override
