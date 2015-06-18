@@ -1,6 +1,5 @@
 package generatecode;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,21 +13,15 @@ public class MyBatisCodeGenerator {
 
 		System.out.println("生成代码--开始");
 
-		String path = MyBatisCodeGenerator.class.getResource("").getPath()
-				.substring(1);
-		String confPath = path + "MBG_configuration.xml";
-
-		System.out.println(path);
-		File configFile = new File(confPath);
-
 		List<String> warnings = new ArrayList<String>();
-		ConfigurationParser cp = new ConfigurationParser(warnings);
-		Configuration config = cp.parseConfiguration(configFile);
 		boolean overwrite = true;
+		ConfigurationParser cp = new ConfigurationParser(warnings);
+		Configuration config = cp.parseConfiguration(
+				MyBatisCodeGenerator.class.getResourceAsStream("/generatecode/MBG_configuration.xml"));
 		DefaultShellCallback callback = new DefaultShellCallback(overwrite);
-		MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config,
-				callback, warnings);
+		MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);
 		myBatisGenerator.generate(null);
+		
 		System.out.println("生成代码--完成");
 	}
 }

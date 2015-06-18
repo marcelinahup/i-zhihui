@@ -1,6 +1,7 @@
 package com.palmyou.v7data.core.persistence.writer;
 
-import com.github.abel533.mapper.Mapper;
+import tk.mybatis.mapper.common.Mapper;
+
 import com.palmyou.v7data.api.domain.user.UserInfo;
 
 public interface UserInfoWriterMapper extends Mapper<UserInfo> {
