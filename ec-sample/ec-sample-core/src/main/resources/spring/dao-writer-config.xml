@@ -21,10 +21,10 @@
 				</bean>
 		      
 				<!-- 通用mapper -->
-				<bean class="com.github.abel533.mapperhelper.MapperInterceptor">
+				<bean class="tk.mybatis.mapper.mapperhelper.MapperInterceptor">
 				    <property name="properties">
 				      <value>
-				        mappers=com.github.abel533.mapper.Mapper
+				        mappers=tk.mybatis.mapper.common.Mapper
 				        IDENTITY=MYSQL
 				        notEmpty=true
 				      </value>
