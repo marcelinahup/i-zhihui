@@ -3,11 +3,11 @@ package com.palmyou.v7data.ms.util;
 import java.util.Set;
 
 import org.apache.commons.collections.SetUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
-import org.springframework.util.CollectionUtils;
 
+import com.palmyou.fw.spring.ext.SpringUtils;
 import com.palmyou.fw.ui.KeyValEntry;
-import com.palmyou.fw.web.util.RedisTemplateUtil;
 
 public class SysCodeUtil {
 	
@@ -28,7 +28,9 @@ public class SysCodeUtil {
 	 */
 	public static Set<KeyValEntry> getKeyValEntry(String type){
 		
-		ValueOperations<String, Set<KeyValEntry>> valueOperations = RedisTemplateUtil.getRedisValueOperations();
+		@SuppressWarnings("unchecked")
+		RedisTemplate<String, Set<KeyValEntry>> redisTemplate = (RedisTemplate<String, Set<KeyValEntry>>)SpringUtils.getBean("redisTamplate");
+		ValueOperations<String, Set<KeyValEntry>> valueOperations = redisTemplate.opsForValue();
 		
 		Set<KeyValEntry> keyValEntrieSet = valueOperations.get(type);
 		
@@ -65,7 +67,10 @@ public class SysCodeUtil {
 	 */
 	public static String getKey(String type, String value){
 		
-		ValueOperations<String, Set<KeyValEntry>> valueOperations = RedisTemplateUtil.getRedisValueOperations();
+		@SuppressWarnings("unchecked")
+		RedisTemplate<String, Set<KeyValEntry>> redisTemplate = (RedisTemplate<String, Set<KeyValEntry>>)SpringUtils.getBean("redisTamplate");
+		
+		ValueOperations<String, Set<KeyValEntry>> valueOperations = redisTemplate.opsForValue();
 		
 		Set<KeyValEntry> keyValEntrySet = valueOperations.get(type);
 		for (KeyValEntry entry : keyValEntrySet) {

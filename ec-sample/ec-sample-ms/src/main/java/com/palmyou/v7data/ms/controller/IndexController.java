@@ -1,7 +1,5 @@
 package com.palmyou.v7data.ms.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
@@ -11,8 +9,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.palmyou.fw.web.permission.WebUser;
-import com.palmyou.fw.web.session.SessionManager;
-import com.palmyou.fw.web.session.SystemSession;
 import com.palmyou.v7data.ms.util.MsgUtil;
 
 @Controller
@@ -39,14 +35,13 @@ public class IndexController extends BaseController{
     }
 	
 	@RequestMapping("/doLogin")
-	public ModelAndView doLogin(ModelAndView mav, HttpServletRequest request,HttpServletResponse response,
+	public ModelAndView doLogin(ModelAndView mav, HttpSession session,
 			@RequestParam String op,@RequestParam String p2){
 		
 		System.out.println(op);
 		System.out.println(p2);
 		
 		// 保存用户信息
-		SystemSession session = SessionManager.getSession(request, response);
 		if ("0".equals(op)) {
 			
 			session.setAttribute("loginUser", new WebUser("123"));

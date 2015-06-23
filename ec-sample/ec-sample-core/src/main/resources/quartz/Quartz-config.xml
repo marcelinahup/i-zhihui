@@ -73,7 +73,7 @@
 		<property name="jobDetail" ref="helloTaskJob" />
 
 		<!-- cron表达式 -->
-		<property name="cronExpression" value="0 0-59 10 * * ?" />
+		<property name="cronExpression" value="0 0/59 10 * * ?" />
 	</bean>
         
 </beans>

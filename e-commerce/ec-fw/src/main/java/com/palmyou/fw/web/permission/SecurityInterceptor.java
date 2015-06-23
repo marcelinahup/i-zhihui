@@ -4,13 +4,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-
-import com.palmyou.fw.web.session.SessionManager;
-import com.palmyou.fw.web.session.SystemSession;
 
 /**
  * 判断用户权限，未登录用户跳转到登录页面
@@ -77,8 +75,7 @@ public class SecurityInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		
 		// 把session放入request，方便后面在controller里面取用
-		SystemSession session = SessionManager.getSession(request, response);
-		request.setAttribute(this.sessionKey, session);
+		HttpSession session = request.getSession();
 		
 		// 1, debug环境不作过滤
 		if(debug){

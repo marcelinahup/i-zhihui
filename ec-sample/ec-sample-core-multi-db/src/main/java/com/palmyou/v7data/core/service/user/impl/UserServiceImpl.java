@@ -7,11 +7,11 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
 import com.palmyou.common.util.StringUtils;
 import com.palmyou.fw.spring.ext.SpringUtils;
-import com.palmyou.fw.web.util.RedisTemplateUtil;
 import com.palmyou.v7data.api.domain.user.UserInfo;
 import com.palmyou.v7data.api.service.user.UserServiceApi;
 import com.palmyou.v7data.core.datasource.DatabaseContextHolder;
@@ -24,6 +24,10 @@ public class UserServiceImpl implements UserServiceApi {
 
 	@Resource
 	private UserInfoWriterMapper userInfoWriterMapper;
+	
+	@Resource
+	RedisTemplate<String, String> redisTemplte;
+	
 	/**
 	 * 个人信息查询
 	 * @param userId
@@ -35,7 +39,8 @@ public class UserServiceImpl implements UserServiceApi {
 		Map<String, MyDruidDataSource> dataSourceMap = SpringUtils.getApplicationContext().getBeansOfType(MyDruidDataSource.class);
 		
 		UserInfo user = null;
-		ValueOperations<String, String> userNameCache = RedisTemplateUtil.getRedisValueOperations();
+		
+		ValueOperations<String, String> userNameCache = redisTemplte.opsForValue();
 		System.out.println("===========================================");
 		for (String dataSourceKey : dataSourceMap.keySet()) {
 			

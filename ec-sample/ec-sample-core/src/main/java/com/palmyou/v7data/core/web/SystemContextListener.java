@@ -13,8 +13,6 @@ import com.alibaba.fastjson.JSONObject;
 import com.palmyou.fw.spring.ext.PropertiesUtils;
 import com.palmyou.fw.spring.ext.SpringUtils;
 import com.palmyou.fw.ui.KeyValEntry;
-import com.palmyou.fw.web.session.SessionManager;
-import com.palmyou.fw.web.util.RedisTemplateUtil;
 
 /**
  * 系统启动加载类。所有需要初始化的数据请放在这里。
@@ -33,10 +31,6 @@ public class SystemContextListener extends ContextLoaderListener {
 		super.contextInitialized(sce);
 		SpringUtils.setApplicationContext((WebApplicationContext) sce.getServletContext().
 				getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE));
-		
-		// 初始化session配置
-		MySessionConfig config = new MySessionConfig();
-		SessionManager.setConfig(config);
 		
 //		ValueOperations<String, Set<KeyValEntry>> sysCodeValueOperations = RedisTemplateUtil.getRedisValueOperations();
 		
