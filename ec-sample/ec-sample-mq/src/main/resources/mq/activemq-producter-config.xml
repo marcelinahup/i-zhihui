@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:amq="http://activemq.apache.org/schema/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+        http://activemq.apache.org/schema/core http://activemq.apache.org/schema/core/activemq-core-5.11.1.xsd">
+	
+     <!-- 连接外部的activeMQ  failover关键字表示客户端与ActiveMQ Server的连接中断后(如Server重新启动)，客户端会自动重新连接-->
+     <bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+             <property name="brokerURL" value="${brokerUrl}" ></property>
+             <property name="useAsyncSend" value="true"></property>
+     </bean>
+    
+    <!-- converter  -->
+    <bean id="defaultMessageConverter" class="com.mq.DefaultMessageConverter" />
+
+    <!--  Spring JmsTemplate config -->
+    <bean id="jmsTemplate" class="org.springframework.jms.core.JmsTemplate">
+        <property name="connectionFactory">
+            <!--  lets wrap in a pool to avoid creating a connection per send -->
+            <bean class="org.springframework.jms.connection.SingleConnectionFactory">
+                <property name="targetConnectionFactory" ref="jmsConnectionFactory" />
+            </bean>
+        </property>
+        <!-- custom MessageConverter -->
+        <property name="messageConverter" ref="defaultMessageConverter" />
+    </bean>
+    
+	<!--=========================================================================================== -->	
+	<!-- 发短信队列 -->
+    <amq:topic name="TOPIC-SMS" physicalName="SMS-TOPIC" />
+    
+    <!-- POJO which send Message uses  Spring JmsTemplate -->
+    <bean id="smsMessageProducer" class="com.mq.MessageProducer">
+        <property name="template" ref="jmsTemplate" />
+        <property name="destination" ref="TOPIC-SMS" />
+    </bean>
+    <!--=========================================================================================== -->	
+    
+    
+</beans>

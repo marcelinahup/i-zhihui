@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Cache-Control" content="no-cache">
+        <meta http-equiv="Expires" content="0">
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>login</title>
+    </head>
+<body>
+<div ><h1>LOGIN</h1></div>
+#now()
+	<form id="loginForm">
+		</form>
+<a href="#" onclick="tpl()" >AJAX</a>
+    #parse('common/globalJs.vm')
+<script type="text/javascript">
+	function tpl(){
+	
+		 var url = "#springUrl('/doLogin.html')";
+		 alert(url);
+		g.jsonPost(url,{op:'op1111',p2:'p2222222'},callback);
+	}
+	
+	function callback(result){
+    	
+    	alert(result.data);
+	}
+</script>
+</body>
+</html>
