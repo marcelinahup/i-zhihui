@@ -3,6 +3,7 @@
 	<name>ec-v7data-core</name>
 	<comment></comment>
 	<projects>
+		<project>ec-fw</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
