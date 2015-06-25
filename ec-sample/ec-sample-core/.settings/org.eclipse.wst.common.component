@@ -7,12 +7,6 @@
         <dependent-module archiveName="ec-v7data-api-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ec-v7data-api/ec-v7data-api">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="ec-common-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ec-common/ec-common">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="ec-fw-0.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/ec-fw/ec-fw">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="java-output-path" value="/ec-v7data-core/target/classes"/>
         <property name="context-root" value="ec-v7data-core"/>
     </wb-module>
