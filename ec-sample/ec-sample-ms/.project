@@ -3,9 +3,7 @@
 	<name>ec-v7data-ms</name>
 	<comment></comment>
 	<projects>
-		<project>ec-common</project>
 		<project>ec-v7data-api</project>
-		<project>ec-fw</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
