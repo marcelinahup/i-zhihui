@@ -12,32 +12,29 @@ import org.slf4j.LoggerFactory;
  */
 public class ZookeeperClientFactory {
 	
+	private static final Logger logger = LoggerFactory.getLogger(ZookeeperClientFactory.class);
+	private static final String APP_NAME_MARK = "\\$\\{appName\\}";
+	
+	// -----------------bean 可配置属性--------------------
 	private String appName;
-
-	private String appNameMark = "\\$\\{appName\\}";
-	
 	private String appPath ="/apps_node/${appName}";
-
 	private String zkServers;
-	
 	private int connectionTimeout = Integer.MAX_VALUE;
-	
 	private int sessionTimeOut = 15000 ;
-	
-	private ZkConnection zkConnection;
+	// ----------------------------------------------------
 	
 	private ZkClient zkClient;
-	
-	private static final Logger logger = LoggerFactory.getLogger(ZookeeperClientFactory.class);
-
-	public String getAppPath() {
-		return appPath;
-	}
 	
 	public String getAppName() {
 		return appName;
 	}
-
+	public void setAppName(String appName) {
+		this.appName = appName;
+	}
+	
+	public String getAppPath() {
+		return appPath;
+	}
 	public void setAppPath(String appPath) {
 		this.appPath = appPath;
 	}
@@ -54,25 +51,27 @@ public class ZookeeperClientFactory {
 		this.sessionTimeOut = sessionTimeOut;
 	}
 	
-	public void setAppName(String appName) {
-		this.appName = appName;
+	public ZkClient getZkClient(){
+		return zkClient;
 	}
-
+	
+	/**
+	 * bean 初始化使用
+	 * 创建连接和客户端
+	 */
 	public void init(){
-		zkConnection = new ZkConnection( zkServers,  sessionTimeOut);
+		
+		ZkConnection zkConnection = new ZkConnection( zkServers,  sessionTimeOut);
 		zkClient = new ZkClient( zkConnection,  connectionTimeout);
-		appPath = appPath.replaceAll(appNameMark, appName);
+		appPath = appPath.replaceAll(APP_NAME_MARK, appName);
+		
+		// 先创建appPath节点
 		if(!zkClient.exists(appPath)){
 			try{
 				zkClient.createPersistent(appPath, true);
 			}catch(Exception e){
-				logger.error("create persistent path : "+appPath+"error!",e);
+				logger.error("create persistent path : " + appPath + "error!", e);
 			}
 		}
 	}
-	
-	public ZkClient getZkClient(){
-		return zkClient;
-	}
-
 }
