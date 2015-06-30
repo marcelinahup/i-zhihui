@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserServiceApi {
 	private UserInfoWriterMapper userInfoWriterMapper;
 	
 	@Resource
-	RedisTemplate<String, String> redisTemplte;
+	RedisTemplate<String, String> redisTemplate;
 	
 	/**
 	 * 个人信息查询
@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserServiceApi {
 		
 		UserInfo user = null;
 		
-		ValueOperations<String, String> userNameCache = redisTemplte.opsForValue();
+		ValueOperations<String, String> userNameCache = redisTemplate.opsForValue();
 		System.out.println("===========================================");
 		for (String dataSourceKey : dataSourceMap.keySet()) {
 			
