@@ -8,9 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.hk.ec.fw.result.JsonResult;
 import com.mq.MessageProducer;
 import com.mq.sms.SmsMessage;
-import com.palmyou.fw.result.JsonResult;
 
 @Controller
 public class IndexController extends BaseController{

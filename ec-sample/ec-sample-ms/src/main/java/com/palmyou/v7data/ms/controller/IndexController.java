@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.palmyou.fw.web.permission.WebUser;
+import com.hk.ec.fw.web.permission.WebUser;
 import com.palmyou.v7data.ms.util.MsgUtil;
 
 @Controller

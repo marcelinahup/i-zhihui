@@ -23,7 +23,7 @@
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
 		<property name="customArgumentResolver">
-			<bean class="com.palmyou.fw.spring.ext.BeanArgumentResolver" />
+			<bean class="com.hk.ec.fw.spring.ext.BeanArgumentResolver" />
 		</property>
 		<property name="messageConverters">
 			<list>
@@ -73,14 +73,14 @@
 	<mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**" />
-            <bean class="com.palmyou.fw.web.permission.SecurityInterceptor" >
+            <bean class="com.hk.ec.fw.web.permission.SecurityInterceptor" >
                 <property name="debug" value="true" />
                 <property name="loginUrl" value="/login.html" />
                 <property name="sessionKey" value="sessionKey" />
                 <property name="sessionUserKey" value="loginUser" />
                 
                 <property name="authentication">
-                    <bean id="authentication" class="com.palmyou.fw.web.permission.SimpleAuthentication" />
+                    <bean id="authentication" class="com.hk.ec.fw.web.permission.SimpleAuthentication" />
                 </property>
                 <property name="noAccessUrl" value="/noAccess.html" />
                 

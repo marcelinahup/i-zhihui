@@ -1,6 +1,6 @@
 package com.palmyou.v7data.ms.util;
 
-import com.palmyou.fw.spring.ext.PropertiesUtils;
+import com.hk.ec.fw.spring.ext.PropertiesUtils;
 
 public class MsgUtil {
 	

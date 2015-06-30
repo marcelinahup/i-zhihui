@@ -7,8 +7,8 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.palmyou.fw.web.AbstractController;
-import com.palmyou.fw.web.permission.WebUser;
+import com.hk.ec.fw.web.AbstractController;
+import com.hk.ec.fw.web.permission.WebUser;
 
 /**
  * Crontroller类的基础类，可以 除掉参数中的空格

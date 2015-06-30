@@ -18,7 +18,7 @@
 
 	<!-- 不同的运行环境配置 -->
     <beans profile="local">  
-		<bean id="propertyConfigurer" class="com.palmyou.fw.spring.ext.PropertiesUtils">
+		<bean id="propertyConfigurer" class="com.hk.ec.fw.spring.ext.PropertiesUtils">
 			<property name="locations">
 				<list>
 					<value>classpath:config/system.properties</value>
@@ -29,7 +29,7 @@
 		</bean>
 	</beans>
     <beans profile="test">  
-		<bean id="propertyConfigurer" class="com.palmyou.fw.spring.ext.PropertiesUtils">
+		<bean id="propertyConfigurer" class="com.hk.ec.fw.spring.ext.PropertiesUtils">
 			<property name="locations">
 				<list>
 					<value>classpath:config/test/system.properties</value>
@@ -40,7 +40,7 @@
 		</bean>
 	</beans> 
     <beans profile="online">  
-		<bean id="propertyConfigurer" class="com.palmyou.fw.spring.ext.PropertiesUtils">
+		<bean id="propertyConfigurer" class="com.hk.ec.fw.spring.ext.PropertiesUtils">
 			<property name="locations">
 				<list>
 					<value>classpath:config/online/system.properties</value>

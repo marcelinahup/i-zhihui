@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.palmyou.fw.result.JsonResult;
-import com.palmyou.fw.spring.ext.RequestBean;
+import com.hk.ec.fw.result.JsonResult;
+import com.hk.ec.fw.spring.ext.RequestBean;
 import com.palmyou.v7data.api.domain.user.UserInfo;
 import com.palmyou.v7data.api.service.user.UserServiceApi;
 import com.palmyou.v7data.ms.controller.BaseController;

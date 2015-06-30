@@ -6,8 +6,8 @@ import org.apache.commons.collections.SetUtils;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
-import com.palmyou.fw.spring.ext.SpringUtils;
-import com.palmyou.fw.ui.KeyValEntry;
+import com.hk.ec.fw.spring.ext.SpringUtils;
+import com.hk.ec.fw.ui.KeyValEntry;
 
 public class SysCodeUtil {
 	

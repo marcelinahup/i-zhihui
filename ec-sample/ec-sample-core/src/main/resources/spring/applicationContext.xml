@@ -54,7 +54,7 @@
         <property name="password" value="59194020"/>
     </bean>    
 
-    <bean id="coreMailSender" class="com.palmyou.common.mail.CoreMailSender">
+    <bean id="coreMailSender" class="com.hk.ec.common.mail.CoreMailSender">
         <property name="simpleMailSender" ref="simpleMailSender"/>
         <property name="groupMailSender" ref="groupMailSender"/>
         <property name="velocityEngine" ref="velocityEngine"/>
@@ -75,12 +75,12 @@
     <context:component-scan  base-package="com.palmyou.v7data.core"/>
     
     <!-- 日志配置 -->
-    <bean id="logAspect" class="com.palmyou.fw.aop.LogAspect" ></bean>
+    <bean id="logAspect" class="com.hk.ec.fw.aop.LogAspect" ></bean>
     <aop:config>  
         <aop:aspect id="logAspect" ref="logAspect">
             <!-- 配置com.spring.service包下所有类或接口的所有方法  -->
            <aop:pointcut id="allService"  
-                expression="execution(* com.palmyou.v7data.core.service.user.impl.*.*(..))" />  
+                expression="execution(* com.hk.ec.v7data.core.service.user.impl.*.*(..))" />  
             <!-- <aop:before pointcut-ref="allService" method="doBefore"/>
             <aop:after pointcut-ref="allService" method="doAfter"/> -->
             <aop:around pointcut-ref="allService" method="doAround"/>
@@ -90,7 +90,7 @@
     
     <!-- 不同的运行环境配置 -->
     <beans profile="local">  
-		<bean id="propertyConfigurer" class="com.palmyou.fw.spring.ext.PropertiesUtils">
+		<bean id="propertyConfigurer" class="com.hk.ec.fw.spring.ext.PropertiesUtils">
 			<property name="locations">
 				<list>
 					<value>classpath:config/system.properties</value>
@@ -101,7 +101,7 @@
 		</bean>
 	</beans>
     <beans profile="test">  
-		<bean id="propertyConfigurer" class="com.palmyou.fw.spring.ext.PropertiesUtils">
+		<bean id="propertyConfigurer" class="com.hk.ec.fw.spring.ext.PropertiesUtils">
 			<property name="locations">
 				<list>
 					<value>classpath:config/test/system.properties</value>
@@ -112,7 +112,7 @@
 		</bean>
 	</beans> 
     <beans profile="online">  
-		<bean id="propertyConfigurer" class="com.palmyou.fw.spring.ext.PropertiesUtils">
+		<bean id="propertyConfigurer" class="com.hk.ec.fw.spring.ext.PropertiesUtils">
 			<property name="locations">
 				<list>
 					<value>classpath:config/online/system.properties</value>

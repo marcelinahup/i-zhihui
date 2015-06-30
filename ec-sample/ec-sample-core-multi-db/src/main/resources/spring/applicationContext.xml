@@ -60,7 +60,7 @@
         <property name="password" value="59194020"/>
     </bean>    
 
-    <bean id="coreMailSender" class="com.palmyou.common.mail.CoreMailSender">
+    <bean id="coreMailSender" class="com.hk.ec.common.mail.CoreMailSender">
         <property name="simpleMailSender" ref="simpleMailSender"/>
         <property name="groupMailSender" ref="groupMailSender"/>
         <property name="velocityEngine" ref="velocityEngine"/>
@@ -87,7 +87,7 @@
     -->
     
     <bean id="propertyConfigurer"
-		class="com.palmyou.fw.spring.ext.PropertiesUtils">
+		class="com.hk.ec.fw.spring.ext.PropertiesUtils">
 		<property name="locations">
 			<list>
 				<value>classpath:config/system.properties</value>
@@ -98,7 +98,7 @@
 	</bean>
     
     <!-- 日志配置 -->
-    <bean id="logAspect" class="com.palmyou.fw.aop.LogAspect" ></bean>
+    <bean id="logAspect" class="com.hk.ec.fw.aop.LogAspect" ></bean>
     <aop:config>  
         <aop:aspect id="logAspect" ref="logAspect">
             <!-- 配置com.spring.service包下所有类或接口的所有方法  -->

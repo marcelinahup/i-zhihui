@@ -5,7 +5,7 @@ import javax.servlet.ServletContextEvent;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 
-import com.palmyou.fw.spring.ext.SpringUtils;
+import com.hk.ec.fw.spring.ext.SpringUtils;
 
 /**
  * 系统启动加载类。所有需要初始化的数据请放在这里。

@@ -36,7 +36,7 @@ xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
   </filter>
   <filter>
     <filter-name>monitorRequest</filter-name>
-    <filter-class>com.palmyou.fw.web.MonitorRequestFilter</filter-class>
+    <filter-class>com.hk.ec.fw.web.MonitorRequestFilter</filter-class>
     <init-param>
       <param-name>monitor</param-name>
       <param-value>false</param-value>

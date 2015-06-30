@@ -10,9 +10,9 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.alibaba.fastjson.JSONObject;
-import com.palmyou.fw.spring.ext.PropertiesUtils;
-import com.palmyou.fw.spring.ext.SpringUtils;
-import com.palmyou.fw.ui.KeyValEntry;
+import com.hk.ec.fw.spring.ext.PropertiesUtils;
+import com.hk.ec.fw.spring.ext.SpringUtils;
+import com.hk.ec.fw.ui.KeyValEntry;
 
 /**
  * 系统启动加载类。所有需要初始化的数据请放在这里。
