@@ -2,10 +2,10 @@ package com.palmyou.common.security;
 
 import org.junit.Test;
 
-import com.hk.ec.common.security.EncryptAES;
-import com.hk.ec.common.security.EncryptDES;
-import com.hk.ec.common.security.EncryptMD5;
-import com.hk.ec.common.security.IrreversibleEncrypt;
+import com.hk.common.security.EncryptAES;
+import com.hk.common.security.EncryptDES;
+import com.hk.common.security.EncryptMD5;
+import com.hk.common.security.IrreversibleEncrypt;
 
 public class TestSecurity {
 	
