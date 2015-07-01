@@ -13,8 +13,8 @@
 	<properties>
 
 		<ecV7dataApi.version>0.0.1</ecV7dataApi.version>
-		<ecCommon.version>0.0.1</ecCommon.version>
-		<ecFw.version>0.0.1</ecFw.version>
+		<commons.version>1.0.RELEASE</commons.version>
+		<ecFw.version>1.0.RELEASE</ecFw.version>
 
 		<project.build.package></project.build.package>
 	</properties>
@@ -26,12 +26,12 @@
 			<version>${ecV7dataApi.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.palmyou</groupId>
-			<artifactId>ec-common</artifactId>
-			<version>${ecCommon.version}</version>
+			<groupId>com.hk</groupId>
+			<artifactId>commons</artifactId>
+			<version>${commons.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.palmyou</groupId>
+			<groupId>com.hk</groupId>
 			<artifactId>ec-fw</artifactId>
 			<version>${ecFw.version}</version>
 		</dependency>
@@ -72,7 +72,7 @@
 		        <artifactId>maven-war-plugin</artifactId>
 
         		<configuration>
-					<warName>ROOT(${profiles.active})</warName>
+					<!-- <warName>CORE(${profiles.active})</warName> -->
 				
 					<!-- 激活spring profile -->
 					<webResources>
