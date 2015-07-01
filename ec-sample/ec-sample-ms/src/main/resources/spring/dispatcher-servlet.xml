@@ -53,13 +53,12 @@
 		<!-- <property name="cacheTTLMs" value="0"></property> -->
 	</bean>
 	
+	<bean id="templateEngine" class="org.thymeleaf.spring3.SpringTemplateEngine">
+		<property name="templateResolver" ref="templateResolver" />
+	</bean>
+	
 	<bean class="org.thymeleaf.spring3.view.ThymeleafViewResolver">
-		<property name="templateEngine" >
-			
-			<bean class="org.thymeleaf.spring3.SpringTemplateEngine">
-				<property name="templateResolver" ref="templateResolver" />
-			</bean>
-		</property>
+		<property name="templateEngine" ref="templateEngine" />
 		<property name="characterEncoding" value="UTF-8" />
 		<property name="order" value="1" />
 	</bean>
