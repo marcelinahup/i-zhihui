@@ -2,20 +2,19 @@ package com.hk.common.mail;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import org.apache.velocity.app.VelocityEngine;
+
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-import org.springframework.ui.velocity.VelocityEngineUtils;
 
 public class CoreMailSender {
 
 	private JavaMailSender simpleMailSender;
 	@SuppressWarnings("unused")
 	private JavaMailSender groupMailSender;
-	private VelocityEngine velocityEngine;
  
 	public class MailType {
 		public static final String TEXT = "text/plain;charset=utf-8";
@@ -58,12 +57,8 @@ public class CoreMailSender {
 				// 邮件发送时间
 				message.setSentDate(new Date());
 				
-				// 根据HTML模板设置邮件内容
-				String text = VelocityEngineUtils.mergeTemplateIntoString(velocityEngine, mail.getVimName(), "utf-8", mail.getVmodel());
-				//text = new String(text.getBytes(),"utf-8");
-			
 				// 使用HTML格式发送邮件
-				message.setText(text, true);
+				message.setText(mail.getContent(), true);
 			}
 		};
 		try {
@@ -73,10 +68,6 @@ public class CoreMailSender {
 		
 		}
 		
-	}
-	
-	public void setVelocityEngine(VelocityEngine velocityEngine) {
-		this.velocityEngine = velocityEngine;
 	}
 
 	public void setSimpleMailSender(JavaMailSender simpleMailSender) {

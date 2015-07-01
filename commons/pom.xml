@@ -89,14 +89,6 @@
 			<scope>compile</scope>
 		</dependency>
 
-		<!-- velocity -->
-		<dependency>
-			<groupId>org.apache.velocity</groupId>
-			<artifactId>velocity</artifactId>
-			<version>1.7</version>
-			<scope>compile</scope>
-		</dependency>
-
 		<!-- office -->
 		<dependency>
 			<groupId>org.apache.poi</groupId>

@@ -382,7 +382,7 @@ public class StringUtils extends org.springframework.util.StringUtils {
 	 */
 	public static String deleteWhitespace(String str)
 	 {
-	      if (org.apache.commons.lang.StringUtils.isEmpty(str)) {
+	      if (str == null || str.isEmpty()) {
 	        return str;
 	      }else {
 	    	  str = str.trim();
