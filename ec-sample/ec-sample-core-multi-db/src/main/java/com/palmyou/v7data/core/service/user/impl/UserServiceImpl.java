@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 
-import com.hk.common.util.StringUtils;
+import com.hk.commons.util.StringUtils;
 import com.hk.ec.fw.spring.ext.SpringUtils;
 import com.palmyou.v7data.api.domain.user.UserInfo;
 import com.palmyou.v7data.api.service.user.UserServiceApi;
