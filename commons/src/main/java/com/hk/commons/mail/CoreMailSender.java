@@ -1,4 +1,4 @@
-package com.hk.common.mail;
+package com.hk.commons.mail;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -30,14 +30,16 @@ public class CoreMailSender {
 				MimeMessageHelper message = new MimeMessageHelper(mimeMessage,true,"utf-8");
 				//设置自定义发件人昵称  
 		        String nick="";  
+		        
 		        try {  
-		            nick=javax.mail.internet.MimeUtility.encodeText("红星家品会");  
+		            nick = javax.mail.internet.MimeUtility.encodeText(mail.getUserName());  
 		        } catch (UnsupportedEncodingException e) {  
 		            e.printStackTrace();  
 		        }   
 		        String from = new String((mail.getFromAddr()).getBytes(),"utf-8");
+		        
 				//发件人		        
-				message.setFrom(new InternetAddress(nick+" <"+from+">"));
+				message.setFrom(new InternetAddress(nick + " <"+from+">"));
 				
 				// 如果有收件人列表，设置收件人
 				if(mail.getToAddrList() != null){
