@@ -62,7 +62,7 @@
                 <property name="sessionUserKey" value="loginUser" />
                 
                 <property name="authentication">
-                    <bean id="authentication" class="com.hk.ec.fw.web.permission.SimpleAuthentication" />
+                    <bean id="authentication" class="com.palmyou.v7data.ms.web.SimpleAuthentication" />
                 </property>
                 <property name="noAccessUrl" value="/noAccess.html" />
                 
